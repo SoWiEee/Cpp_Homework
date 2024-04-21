@@ -18,7 +18,7 @@ class BoxOfProduce {
 void showProduce(BoxOfProduce& box) {
 
     cout << "[PRODUCE IN BOX]" << endl;
-    for(int i = 0;i < 3;i++)
+    for(int i = 0; i < 3; i++)
         cout << i + 1 << ". " << box.getProduce(i) << endl;
     cout << endl;
 }

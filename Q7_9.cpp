@@ -4,36 +4,35 @@ using namespace std;
 
 class Postnet {
     public:
+        // default
+        Postnet() {};
+        // zip -> bar
         Postnet(int zipCode) {
             convertIntToBarcode(zipCode);
         }
+        // bar -> zip
         Postnet(string barCode) {
             convertStrToBarcode(barCode);
         }
-        Postnet() {};
-        void setBarCode(string barCode) {
-            convertStrToBarcode(barCode);
-        }
-        void outputZipCode() const {
 
+        void outputZipCode(){
             int index = 0, digit;
 
-            for(int i = 0;i < 5;i++) {
+            for(int i = 0; i < 5; i++) {
 
                 digit = 0;
-                for(int j = 0; j < 5;j++)
+                for(int j = 0; j < 5; j++){
                     digit += barCode[index + j] * numList[j];
-
-                if(digit != 11)
+                }
+                if(digit != 11){
                     cout << digit;
-                else
+                }else{
                     cout << 0;
-
+                }
                 index += 5;
-
             }
-
         }
+        
         void outputBarCode() const {
             cout << 1;
             for(int i = 0; i < 25; i++){
@@ -44,7 +43,8 @@ class Postnet {
 
     private:
         int barCode[25];
-        int numList[5] = {7, 4, 2, 1, 0};
+        int numList[5] = {7, 4, 2, 1, 0};   // encode parameter
+        // 
         void convertStrToBarcode(string barCode) {
             for(int i = 1; i < 26; i++) {
                 this->barCode[i-1] = barCode[i] - 48;
@@ -58,14 +58,15 @@ int main(void) {
     int zipCode;
     string barCode;
 
-    cout << "Enter the bar code as a 27-digit number => ";
+    cout << "Enter the bar code as a 25-digit number => ";  // 110100101000101011000010011
     cin >> barCode;
+    // construct
     Postnet postnet(barCode);
     cout << "ZIP CODE: ";
     postnet.outputZipCode();
     cout << endl << endl;
 
-    cout << "Enter the zip code as a 5-digit number => ";
+    cout << "Enter the zip code as a 5-digit number => ";   // 47210
     cin >> zipCode;
     postnet = Postnet(zipCode);
     cout << "BAR CODE: ";

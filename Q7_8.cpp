@@ -3,37 +3,42 @@
 
 using namespace std;
 
-void reserveVector(vector<int>& score, int input) {
-    score.reserve(input + 1);
-    for(int i = score.capacity(); i < input + 1; i++){
+void reserveVector(vector<int>& score, int input_score) {
+
+    int capacity = score.capacity();
+    score.reserve(input_score + 1);
+
+    for(int i = capacity; i < input_score + 1; i++)
         score.push_back(0);
-    }
 }
 
 void draw(int length) {
-    for(int i = 0;i < length;i++){
+
+    for(int i = 0;i < length;i++)
         cout << '*';
-    }
 }
 
 int main(void) {
 
-    int input_score;
+    int input_score, capacity;
     vector<int> score(0);
 
     cout << "Enter the score separated by spaces (enter -1 to end)" << endl << "> ";
 
     while(true) {
+
         cin >> input_score;
         if(input_score != -1) {
-            if(input_score > score.capacity() - 1 ){
+
+            capacity = score.capacity();
+            if(input_score > capacity - 1 ){
                 reserveVector(score, input_score);
             }
-            score[input_score] += 1;
+            score[input_score] ++;
         }
         else{
             break;
-        }   
+        }
     }
 
     for(int i = 0; i < score.size(); i++) {
@@ -41,8 +46,6 @@ int main(void) {
         draw(score[i]);
         cout << endl;
     }
-
     system("pause");
     return 0;
-
 }
