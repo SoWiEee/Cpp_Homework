@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Student {
+class Student: public UniversityStaff{
 public:
 // constructor
     Student();
