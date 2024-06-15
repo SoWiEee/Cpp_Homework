@@ -1,5 +1,5 @@
-#ifndef DICE.H
-#define DICE.H
+#ifndef DICE_H
+#define DICE_H
 
 class Dice {
 public:
@@ -10,16 +10,6 @@ public:
 
 protected:
     int numSides;
-};
-
-// chlid class
-class LoadedDice : public Dice {
-public:
-    // constructor
-    LoadedDice();
-    LoadedDice(int numSides);
-    
-    virtual int rollDice() const;
 };
 
 #endif

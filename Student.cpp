@@ -5,31 +5,21 @@
 
 using namespace std;
 
-class Student {
-public:
 // constructor
-    Student() : universityName(""), registrationNumber(0), proctor() {}
-    Student(string uniName, int regNum, UniversityStaff proctor)
-        : universityName(uniName), registrationNumber(regNum), proctor(proctor) {}
-    Student(const Student& other)
-        : universityName(other.universityName), registrationNumber(other.registrationNumber), proctor(other.proctor) {}
-    
-    // overloading
-    Student& operator=(const Student& rtSide) {
-        if (this == &rtSide) return *this;
-        universityName = rtSide.universityName;
-        registrationNumber = rtSide.registrationNumber;
-        proctor = rtSide.proctor;
-        return *this;
-    }
+Student:: Student() : universityName(""), registrationNumber(0), proctor() {}
+Student:: Student(string uniName, int regNum, UniversityStaff proctor): universityName(uniName), registrationNumber(regNum), proctor(proctor) {}
+Student:: Student(const Student& other): universityName(other.universityName), registrationNumber(other.registrationNumber), proctor(other.proctor) {}
 
-    // getter
-    string getUniversityName() const { return universityName; }
-    int getRegistrationNumber() const { return registrationNumber; }
-    UniversityStaff getProctor() const { return proctor; }
+// overloading
+Student& Student:: operator=(const Student& rtSide) {
+    if (this == &rtSide) return *this;
+    universityName = rtSide.universityName;
+    registrationNumber = rtSide.registrationNumber;
+    proctor = rtSide.proctor;
+    return *this;
+}
 
-private:
-    string universityName;
-    int registrationNumber;
-    UniversityStaff proctor;
-};
+// getter
+string Student:: getUniversityName() const { return universityName; }
+int Student:: getRegistrationNumber() const { return registrationNumber; }
+UniversityStaff Student:: getProctor() const { return proctor; }

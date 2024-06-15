@@ -1,5 +1,5 @@
-#ifndef SCIENCESTUDENT.H
-#define SCIENCESTUDENT.H
+#ifndef SCIENCESTUDENT_H
+#define SCIENCESTUDENT_H
 
 #include <iostream>
 #include<string>

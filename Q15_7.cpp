@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "Dice.h"
+#include "LoadedDice.h"
 
 using namespace std;
 

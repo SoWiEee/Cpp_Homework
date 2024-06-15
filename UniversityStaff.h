@@ -1,5 +1,5 @@
-#ifndef UNIVERSITYSTAFF.H
-#define UNIVERSITYSTAFF.H
+#ifndef UNIVERSITYSTAFF_H
+#define UNIVERSITYSTAFF_H
 
 #include <string>
 #include <iostream>
