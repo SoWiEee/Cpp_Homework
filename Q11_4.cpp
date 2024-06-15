@@ -3,7 +3,6 @@
 #include "User.h"
 #include "Administrator.h"
 
-
 int main(){
     User user;
     Administrator admin;
