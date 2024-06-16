@@ -1,0 +1,133 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <random>
+
+using namespace std;
+
+class Creature {
+private:
+    int strength;
+    int hitpoints;
+
+public:
+    // constructor
+    Creature(): strength(10), hitpoints(10) {};
+    Creature(int newStrength, int newHit){
+        strength = newStrength;
+        hitpoints = newHit;
+    }
+
+    // getter
+    int getStren(){
+        return strength;
+    }
+    int getHit(){
+        return hitpoints;
+    }
+    virtual string getSpecies() = 0;
+    virtual int getDamage(){
+        // All creatures inflict damage, which is a random number up to their strength
+        int damage = (rand() % strength) + 1;
+        cout << getSpecies() << " attacks for " << damage << " points!" << endl;
+        hitpoints -= damage;    // attack
+        return damage;
+    }
+};
+
+class Demon: public Creature{
+    public:
+    Demon(int newStrength, int newHit) : Creature(newStrength, newHit) {}
+    string getSpecies() { return "Demon"; }
+    int getDamage() {
+        int damage = Creature::getDamage();
+        // Demons can inflict damage of 50 with a 5% chance
+        if ((rand() % 100) < 5) {
+            damage = damage + 50;
+            cout << "Demonic attack inflicts 50 additional damage points!" << endl;
+        }
+        return damage;
+    }
+};
+
+
+class Human: public Creature{
+public:
+    Human(int newStrength, int newHit) : Creature(newStrength, newHit) {}
+    string getSpecies() { return "Human"; }
+};
+
+class Elf: public Creature{
+public:
+    // constructor
+    Elf(int newStrength, int newHit) : Creature(newStrength, newHit) {}
+    string getSpecies() { return "Elf"; }
+    int getDamage(){
+        int base = (rand() % getStren()) + 1;
+        // double damage
+        if(rand() % 10 == 0){
+            cout << "Magical attack inflicts " << base <<" additional damage points!" << endl;
+            return base*2;
+        }
+        return base;
+    }
+};
+
+class CyberDemon: public Demon {
+public:
+    CyberDemon(int newStrength, int newHit) : Demon(newStrength, newHit) {}
+    string getSpecies() { return "Cyberdemon"; }
+
+    int getDamage(){
+        int base = (rand() % getStren()) + 1;
+        cout << getSpecies() << " attacks for " << base << " points!" << endl;
+        if((rand( ) % 100) < 5){
+            cout << "Demonic attack inflicts 50 additional damage points!" << endl;
+            return base + 50;
+
+        }
+        return base;
+    }
+};
+class Balrog: public Demon {
+public:
+    Balrog(int newStrength, int newHit) : Demon(newStrength, newHit) {}
+    string getSpecies() { return "Balrog"; }
+    int getDamage(){
+        int damage = Demon::getDamage();
+        // attack twice
+        int damage2 = (rand() % getStren()) + 1;
+        cout << "Balrog speed attack inflicts " << damage2 << " additional damage points!" << endl;
+        return damage + damage2;
+    }
+};
+
+void battleArena(Creature &creature1, Creature &creature2) {
+    while (creature1.getHit() > 0 && creature2.getHit() > 0) {
+        creature1.getDamage();
+        creature2.getDamage();
+    }
+
+    if (creature1.getHit() <= 0 && creature2.getHit() <= 0) {
+        cout << "The battle is a tie." << endl;
+    } else if (creature1.getHit() > 0) {
+        cout << creature1.getSpecies() << " wins the battle." << endl;
+    } else {
+        cout << creature2.getSpecies() << " wins the battle." << endl;
+    }
+}
+
+int main(void){
+    srand(time(0));
+    Human h(30, 40);
+    Elf e(50, 50);
+    CyberDemon c(60, 60);
+    Balrog b(70, 70);
+
+    battleArena(h, e);
+    battleArena(c, b);
+
+    system("pause");
+    return 0;
+}
+
